@@ -1,3 +1,6 @@
+# Mission 03 of the Lego MINDSTORMS Voice Challenge: Powered by Alexa
+# Ported to Python by Franklin Lobb
+# Original version supplied by Amazon
 
 import logging.handlers
 import requests
