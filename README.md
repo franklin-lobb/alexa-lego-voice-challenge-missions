@@ -10,6 +10,14 @@ To use this code, when creating your Alexa skill, choose the **Python Alexa Host
 
 The interaction model (used on the Build tab), is included for your convenience.
 
-## Notes
+## Alternate/Updated Version of Mission 4
 
-A revised Mission 4 may (or may) not be in the works. :bowtie:
+Mission folder 4a contains an alternate version of the Mission 4 skill and EV3 program.  The differences include:
+* updated interaction model including:
+  * two word invocation name
+  * expanded sample utterances
+  * slot values with synonyms
+  * slot values with id's
+  * auto-delegation of dialog management, prompting for requires slot values, and validating slot values
+* MoveIntent and SetCommandIntent handlers get the id of the slot value and use that in the command passed to the EV3 (This allows new synonyms to be added to the interaction model without needing to update the EV3 code.)
+* two new values in the EV3 program's command enums to match the id's specified in the interaction model
