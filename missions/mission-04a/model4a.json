@@ -1,0 +1,323 @@
+{
+  "interactionModel": {
+      "languageModel": {
+          "invocationName": "mind storms",
+          "intents": [
+              {
+                  "name": "AMAZON.CancelIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.HelpIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.StopIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.NavigateHomeIntent",
+                  "samples": []
+              },
+              {
+                  "name": "MoveIntent",
+                  "slots": [
+                      {
+                          "name": "Direction",
+                          "type": "DirectionType",
+                          "samples": [
+                              "move {Direction}",
+                              "turn {Direction}",
+                              "go in the {Direction} direction",
+                              "{Direction}"
+                          ]
+                      },
+                      {
+                          "name": "Duration",
+                          "type": "AMAZON.NUMBER"
+                      }
+                  ],
+                  "samples": [
+                      "move it",
+                      "go somewhere",
+                      "{Direction}",
+                      "{Direction} now",
+                      "move {Direction}",
+                      "go {Direction}",
+                      "turn {Direction}",
+                      "{Direction} {Duration} seconds",
+                      "move {Direction} for {Duration} seconds",
+                      "go {Direction} for {Duration} seconds"
+                  ]
+              },
+              {
+                  "name": "SetSpeedIntent",
+                  "slots": [
+                      {
+                          "name": "Speed",
+                          "type": "AMAZON.NUMBER"
+                      }
+                  ],
+                  "samples": [
+                      "set speed {Speed} percent",
+                      "set {Speed} percent speed",
+                      "set speed to {Speed} percent"
+                  ]
+              },
+              {
+                  "name": "SetCommandIntent",
+                  "slots": [
+                      {
+                          "name": "Command",
+                          "type": "CommandType",
+                          "samples": [
+                              "do {Command}",
+                              "{Command}"
+                          ]
+                      }
+                  ],
+                  "samples": [
+                      "do something",
+                      "activate {Command} mode",
+                      "move in a {Command}",
+                      "fire {Command}",
+                      "activate {Command}",
+                      "{Command}"
+                  ]
+              }
+          ],
+          "types": [
+              {
+                  "name": "DirectionType",
+                  "values": [
+                      {
+                          "id": "stop",
+                          "name": {
+                              "value": "stop",
+                              "synonyms": [
+                                  "break",
+                                  "brake",
+                                  "halt"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "backward",
+                          "name": {
+                              "value": "backward",
+                              "synonyms": [
+                                  "back up",
+                                  "backwards",
+                                  "reverse"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "forward",
+                          "name": {
+                              "value": "forward",
+                              "synonyms": [
+                                  "forwards",
+                                  "ahead",
+                                  "straight",
+                                  "straight ahead",
+                                  "continue"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "right",
+                          "name": {
+                              "value": "right",
+                              "synonyms": [
+                                  "starboard"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "left",
+                          "name": {
+                              "value": "left",
+                              "synonyms": [
+                                  "port"
+                              ]
+                          }
+                      }
+                  ]
+              },
+              {
+                  "name": "CommandType",
+                  "values": [
+                      {
+                          "id": "sentry",
+                          "name": {
+                              "value": "sentry",
+                              "synonyms": [
+                                  "guard",
+                                  "keep an eye out"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "circle",
+                          "name": {
+                              "value": "circle",
+                              "synonyms": [
+                                  "around"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "square",
+                          "name": {
+                              "value": "square",
+                              "synonyms": [
+                                  "box",
+                                  "rectangle"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "patrol",
+                          "name": {
+                              "value": "patrol",
+                              "synonyms": [
+                                  "wander",
+                                  "stroll"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "fire-all",
+                          "name": {
+                              "value": "all shot",
+                              "synonyms": [
+                                  "all shots",
+                                  "everything",
+                                  "unload it all",
+                                  "three"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "fire-one",
+                          "name": {
+                              "value": "one shot",
+                              "synonyms": [
+                                  "warning shot",
+                                  "just once",
+                                  "a tracer",
+                                  "cannon"
+                              ]
+                          }
+                      }
+                  ]
+              }
+          ]
+      },
+      "dialog": {
+          "intents": [
+              {
+                  "name": "MoveIntent",
+                  "delegationStrategy": "ALWAYS",
+                  "confirmationRequired": false,
+                  "prompts": {},
+                  "slots": [
+                      {
+                          "name": "Direction",
+                          "type": "DirectionType",
+                          "confirmationRequired": false,
+                          "elicitationRequired": true,
+                          "prompts": {
+                              "elicitation": "Elicit.DirectionSlot.MoveIntent"
+                          },
+                          "validations": [
+                              {
+                                  "type": "hasEntityResolutionMatch",
+                                  "prompt": "Validation.DirectionSlot.MoveIntent"
+                              }
+                          ]
+                      },
+                      {
+                          "name": "Duration",
+                          "type": "AMAZON.NUMBER",
+                          "confirmationRequired": false,
+                          "elicitationRequired": false,
+                          "prompts": {}
+                      }
+                  ]
+              },
+              {
+                  "name": "SetCommandIntent",
+                  "delegationStrategy": "ALWAYS",
+                  "confirmationRequired": false,
+                  "prompts": {},
+                  "slots": [
+                      {
+                          "name": "Command",
+                          "type": "CommandType",
+                          "confirmationRequired": false,
+                          "elicitationRequired": true,
+                          "prompts": {
+                              "elicitation": "Elicit.CommandSlot.SetCommandIntent"
+                          },
+                          "validations": [
+                              {
+                                  "type": "hasEntityResolutionMatch",
+                                  "prompt": "Validation.CommandSlot.SetCommandIntent"
+                              }
+                          ]
+                      }
+                  ]
+              }
+          ],
+          "delegationStrategy": "ALWAYS"
+      },
+      "prompts": [
+          {
+              "id": "Elicit.DirectionSlot.MoveIntent",
+              "variations": [
+                  {
+                      "type": "PlainText",
+                      "value": "which direction did you want to move?"
+                  }
+              ]
+          },
+          {
+              "id": "Validation.DirectionSlot.MoveIntent",
+              "variations": [
+                  {
+                      "type": "PlainText",
+                      "value": "I don't recognize {Direction} as a direction to move. Which way would you like me to move?"
+                  },
+                  {
+                      "type": "PlainText",
+                      "value": "I don't recognize that direction. Where would you like me to move?"
+                  }
+              ]
+          },
+          {
+              "id": "Elicit.CommandSlot.SetCommandIntent",
+              "variations": [
+                  {
+                      "type": "PlainText",
+                      "value": "which mode or command did you want me to execute?"
+                  }
+              ]
+          },
+          {
+              "id": "Validation.CommandSlot.SetCommandIntent",
+              "variations": [
+                  {
+                      "type": "PlainText",
+                      "value": "I don't recognize {Command} as a valid command. Tell me again, which command did you want me to execute?"
+                  },
+                  {
+                      "type": "PlainText",
+                      "value": "I don't recognize that commend. Tell me again, which command did you want me to execute?"
+                  }
+              ]
+          }
+      ]
+  }
+}
